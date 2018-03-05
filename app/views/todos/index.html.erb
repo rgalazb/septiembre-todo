@@ -1,0 +1,23 @@
+<div class="row">
+  <% @todos.each do |todo| %>
+    <div class="col-md-4">
+      <div class="card" style="width: 19rem;">
+        <%= image_tag todo.image, class: 'card-img-top' %>
+        <div class="card-body">
+          <h5 class="card-title">
+            <a href="<%= todo_path(todo) %>">
+              <%= todo.name %>
+            </a>
+          </h5>
+          <% if current_user.present? %>
+            <% if current_user.tasks.find_by(todo_id: todo.id).complete %>
+              <%= link_to 'No Listo', tasks_uncomplete_todo_path(todo), class: 'btn btn-danger', method: :post %>
+            <% else %>
+              <%= link_to 'Listo', tasks_complete_todo_path(todo), class: 'btn btn-primary', method: :post %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

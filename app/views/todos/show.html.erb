@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-md-12 text-center">
+    <h3>
+      <%= @todo.name %>
+    </h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 text-center">
+    <h3>
+      <%= image_tag @todo.image %>
+    </h3>
+  </div>
+</div>
+
+<% if @tasks_complete.count > 0 %>
+  <h3>Ultimos 5 usuarios que ya lo hicieron</h3>
+  <ol>
+    <% @tasks_complete.each do |task| %>
+      <li>
+        <%= task.user.name %>
+        <%= image_tag task.user.image, width: '30px' %>
+      </li>
+    <% end %>
+  </ol>
+<% else %>
+  <h3 class="text-center">Nadie a completado esta tarea aún puedes ser el primero</h3>
+<% end %>
